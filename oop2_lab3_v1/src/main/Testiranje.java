@@ -20,7 +20,7 @@ public class Testiranje {
         frame.add(new Button("Button 4"));
         frame.add(new Button("Button 5"));
 
-        frame.pack();
+        //frame.pack();
         frame.setVisible(true);
     }
 }

@@ -26,9 +26,7 @@ public class Plac extends Panel {
 		redovi = r;
 		kolone = k;
 		parcele = new Parcela[r][k];
-		GridLayout grid = new GridLayout(r,k);
-		grid.setHgap(5);
-		grid.setVgap(5);
+		GridLayout grid = new GridLayout(r, k, 5, 5);
 		setLayout(grid);
 		setBackground(Color.WHITE);
 		for (int i = 0; i < r; i++) {
@@ -40,7 +38,9 @@ public class Plac extends Panel {
 		}
 	}
 
-	void selektovanaParcela(Parcela p) {
+	void selektujParcelu(Parcela p) {
+		if (p == null)
+			return;
 		if (selektovana != null) {
 			selektovana.setFont(Parcela.standardniFont);
 		}
@@ -53,6 +53,7 @@ public class Plac extends Panel {
 			return;
 		// ne mora da bude hidroelektrana
 		Proizvodjac proizvodjac = new Hidroelektrana(baterija);
+
 		loop0: for (int i = 0; i < redovi; i++) {
 			for (int j = 0; j < kolone; j++) {
 				if (parcele[i][j] != selektovana)
@@ -61,7 +62,7 @@ public class Plac extends Panel {
 					listaProizvodjaca.remove(selektovana);
 					((Proizvodjac) selektovana).zaustavi();
 				}
-				selektovanaParcela(proizvodjac);
+				selektujParcelu(proizvodjac);
 				this.remove(i * kolone + j);
 				this.add(proizvodjac, i * kolone + j);
 				parcele[i][j] = proizvodjac;

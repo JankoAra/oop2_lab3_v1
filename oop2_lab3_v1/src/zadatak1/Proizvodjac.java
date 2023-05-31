@@ -8,7 +8,7 @@ public abstract class Proizvodjac extends Parcela implements Runnable {
 	private Baterija baterija;
 	private int osnovnoVreme;
 	private int ukupnoVreme;
-	private boolean aktivan = true;
+	private boolean aktivan;
 	private Thread mojaNit;
 
 	public Proizvodjac(char o, Color b, int v, Baterija bat) {
@@ -17,6 +17,7 @@ public abstract class Proizvodjac extends Parcela implements Runnable {
 		baterija = bat;
 		ukupnoVreme = v + new Random().nextInt(301);
 		mojaNit = new Thread(this);
+		aktivan = true;
 		mojaNit.start();
 	}
 
@@ -38,16 +39,14 @@ public abstract class Proizvodjac extends Parcela implements Runnable {
 				if (uspesnaProizvodnja()) {
 					baterija.dodajEnergiju(brojJedinicaEnergije());
 					setForeground(Color.RED);
-					//System.out.println("Generisano " + brojJedinicaEnergije() + " energije");
+					// System.out.println("Generisano " + brojJedinicaEnergije() + " energije");
 				}
 				Thread.sleep(300);
 				setForeground(old);
 
 			} catch (InterruptedException e) {
-				System.out.println("Prekinuta nit");
+				//System.out.println("Prekinuta nit");
 			}
 		}
-
 	}
-
 }

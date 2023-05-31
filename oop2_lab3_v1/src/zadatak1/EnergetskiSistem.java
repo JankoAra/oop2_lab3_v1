@@ -53,5 +53,9 @@ public class EnergetskiSistem extends Frame {
 
 		setVisible(true);
 	}
+	
+	public static void main(String[] args) {
+		new EnergetskiSistem(5, 5, 100);
+	}
 
 }
