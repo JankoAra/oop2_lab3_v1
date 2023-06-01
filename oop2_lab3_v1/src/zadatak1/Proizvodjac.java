@@ -35,6 +35,8 @@ public abstract class Proizvodjac extends Parcela implements Runnable {
 		while (aktivan) {
 			try {
 				Thread.sleep(ukupnoVreme);
+				if (mojaNit.interrupted())
+					continue;
 				Color old = getForeground();
 				if (uspesnaProizvodnja()) {
 					baterija.dodajEnergiju(brojJedinicaEnergije());
@@ -42,11 +44,13 @@ public abstract class Proizvodjac extends Parcela implements Runnable {
 					// System.out.println("Generisano " + brojJedinicaEnergije() + " energije");
 				}
 				Thread.sleep(300);
+				if (mojaNit.interrupted())
+					continue;
 				setForeground(old);
 
 			} catch (InterruptedException e) {
-				//System.out.println("Prekinuta nit");
 			}
 		}
+		// System.out.println("Prekinuta nit");
 	}
 }
